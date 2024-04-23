@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Jam Real time menggunakan JavaScript</h2>
+
+    <p id="tempat_tanggal"></p>
+
+    <script type="text/javascript">
+      function tampil_tanggal() {
+        var sekarang = new Date();
+        document.getElementById("tempat_tanggal").innerHTML =
+          sekarang.toLocaleString();
+        setTimeout(tampil_tanggal, 1000);
+      }
+      tampil_tanggal();
+    </script>
+  </body>
+</html>

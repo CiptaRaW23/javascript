@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Progress Bar Download</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      #progress {
+        width: 300px;
+        height: 30px;
+        border: 1px solid #000;
+        margin-top: 20px;
+      }
+      #bar {
+        width: 0%;
+        height: 100%;
+        background-color: green;
+      }
+      #percent {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Progress Bar Download</h2>
+    <div id="progress">
+      <div id="bar"></div>
+    </div>
+    <div id="percent">0%</div>
+    <button id="startDownload">Mulai Download</button>
+
+    <script>
+      $(document).ready(function () {
+        $("#startDownload").click(function () {
+          var totalSize = 156000; // Ukuran file yang akan diunduh (dalam bytes)
+          var downloaded = 0; // Jumlah data yang sudah diunduh
+          var progressBar = $("#bar");
+          var percentText = $("#percent");
+
+          // Fungsi untuk memperbarui progress bar
+          function updateProgressBar() {
+            var progress = Math.min((downloaded / totalSize) * 100, 100);
+            progressBar.width(progress + "%");
+            percentText.text(progress.toFixed(2) + "%");
+          }
+
+          // Simulasi proses download dengan Ajax
+          var downloadInterval = setInterval(function () {
+            downloaded += 1000; // Simulasi unduhan data sebesar 1024 bytes
+            updateProgressBar();
+            if (downloaded >= totalSize) {
+              clearInterval(downloadInterval);
+              alert("Download selesai.");
+            }
+          }, 100); // Simulasi interval 100ms
+        });
+      });
+    </script>
+  </body>
+</html>
